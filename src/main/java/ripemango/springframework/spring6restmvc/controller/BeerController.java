@@ -3,6 +3,7 @@ package ripemango.springframework.spring6restmvc.controller;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -19,8 +20,16 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/beer")
 public class BeerController {
-
     final private BeerService beerService;
+
+    @PutMapping("{beerId}")
+    public ResponseEntity updateById(@PathVariable("beerId")UUID beerId , @RequestBody Beer beer){
+
+
+        beerService.updateBeerById(beerId,beer);
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
     @PostMapping
 //    @RequestMapping(method = RequestMethod.POST)
@@ -28,7 +37,10 @@ public class BeerController {
 
         Beer saveBeer = beerService.saveNewBeer(beer);
 
-        return new ResponseEntity(HttpStatus.CREATED);
+        HttpHeaders header = new HttpHeaders();
+        header.add("Location","/api/v1/beer/" + saveBeer.getId().toString());
+
+        return new ResponseEntity(header,HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.GET)
