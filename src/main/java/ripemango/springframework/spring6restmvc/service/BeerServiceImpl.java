@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ripemango.springframework.spring6restmvc.model.Beer;
-import ripemango.springframework.spring6restmvc.model.BeerStyle;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -65,11 +64,11 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Beer getBeerById(UUID id) {
+    public Optional<Beer> getBeerById(UUID id) {
 
         log.debug("Test for this");
 
-        return beerMap.get(id);
+        return Optional.of(beerMap.get(id));
     }
 
     @Override

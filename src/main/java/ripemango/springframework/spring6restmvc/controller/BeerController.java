@@ -78,7 +78,7 @@ public class BeerController {
 
         log.debug("test for controller -12345");
 
-        return beerService.getBeerById(beerId);
+        return beerService.getBeerById(beerId).orElseThrow(NotFoundException :: new);
 
     }
 }
