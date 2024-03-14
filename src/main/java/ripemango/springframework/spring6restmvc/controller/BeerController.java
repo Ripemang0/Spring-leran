@@ -1,15 +1,13 @@
 package ripemango.springframework.spring6restmvc.controller;
 
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ripemango.springframework.spring6restmvc.model.Beer;
+import ripemango.springframework.spring6restmvc.model.BeerDTO;
 import ripemango.springframework.spring6restmvc.service.BeerService;
 
 import java.util.List;
@@ -30,7 +28,7 @@ public class BeerController {
 
 
     @PatchMapping(BEER_PATH_ID)
-    public ResponseEntity updateBeerPatchById(@PathVariable("beerId")UUID beerId , @RequestBody Beer beer){
+    public ResponseEntity updateBeerPatchById(@PathVariable("beerId")UUID beerId , @RequestBody BeerDTO beer){
 
         beerService.patchBeerById(beerId,beer);
 
@@ -48,7 +46,7 @@ public class BeerController {
 
 
     @PutMapping(BEER_PATH_ID)
-    public ResponseEntity updateById(@PathVariable("beerId")UUID beerId , @RequestBody Beer beer){
+    public ResponseEntity updateById(@PathVariable("beerId")UUID beerId , @RequestBody BeerDTO beer){
 
 
         beerService.updateBeerById(beerId,beer);
@@ -58,9 +56,9 @@ public class BeerController {
 
     @PostMapping(BEER_PATH)
 //    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity handlepost(@RequestBody Beer beer){
+    public ResponseEntity handlepost(@RequestBody BeerDTO beer){
 
-        Beer saveBeer = beerService.saveNewBeer(beer);
+        BeerDTO saveBeer = beerService.saveNewBeer(beer);
 
         HttpHeaders header = new HttpHeaders();
         header.add("Location","/api/v1/beer/" + saveBeer.getId().toString());
@@ -69,12 +67,12 @@ public class BeerController {
     }
 
     @GetMapping(BEER_PATH)
-    public List<Beer> listBeers(){
+    public List<BeerDTO> listBeers(){
         return beerService.listBeers();
     }
 
     @GetMapping(BEER_PATH_ID)
-    public Beer getBeerById(@PathVariable("beerId") UUID beerId){
+    public BeerDTO getBeerById(@PathVariable("beerId") UUID beerId){
 
         log.debug("test for controller -12345");
 
