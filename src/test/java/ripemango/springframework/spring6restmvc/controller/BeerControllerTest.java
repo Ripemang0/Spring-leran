@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import ripemango.springframework.spring6restmvc.model.BeerDTO;
 import ripemango.springframework.spring6restmvc.service.BeerService;
 import ripemango.springframework.spring6restmvc.service.BeerServiceImpl;
@@ -67,11 +68,13 @@ class BeerControllerTest {
 
         given(beerService.saveNewBeer(any(BeerDTO.class))).willReturn(beerServiceImpl.listBeers().get(1));
 
-        mockMvc.perform(post(BEER_PATH)
+        MvcResult mvcResult = mockMvc.perform(post(BEER_PATH)
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(beerDTO)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isBadRequest()).andReturn();
+
+        System.out.println(mvcResult.getResponse().getContentAsString());
     }
 
     @Test
