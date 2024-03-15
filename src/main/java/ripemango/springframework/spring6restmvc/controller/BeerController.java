@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ripemango.springframework.spring6restmvc.model.BeerDTO;
 import ripemango.springframework.spring6restmvc.service.BeerService;
@@ -59,7 +60,7 @@ public class BeerController {
 
     @PostMapping(BEER_PATH)
 //    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity handlepost(@RequestBody BeerDTO beer){
+    public ResponseEntity handlepost(@Validated @RequestBody BeerDTO beer){
 
         BeerDTO saveBeer = beerService.saveNewBeer(beer);
 
