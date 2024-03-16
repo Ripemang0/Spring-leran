@@ -1,6 +1,9 @@
 package ripemango.springframework.spring6restmvc.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import ripemango.springframework.spring6restmvc.model.BeerStyle;
@@ -25,10 +28,22 @@ public class Beer {
 
     @Version
     private Integer version;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 50)
+    @Column(length = 50)
     private String beerName;
+    @NotNull
     private BeerStyle beerStyle;
+
+    @NotNull
+    @NotBlank
+    @Size(max = 255)
     private String upc;
     private Integer quantityOnHand;
+
+    @NotNull
     private BigDecimal price;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;

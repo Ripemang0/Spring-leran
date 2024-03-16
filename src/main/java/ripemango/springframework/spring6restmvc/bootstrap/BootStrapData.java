@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import ripemango.springframework.spring6restmvc.entities.Beer;
+import ripemango.springframework.spring6restmvc.model.BeerStyle;
 import ripemango.springframework.spring6restmvc.repositories.BeerRepository;
 import ripemango.springframework.spring6restmvc.repositories.CustomerRepository;
 
@@ -30,6 +31,7 @@ public class BootStrapData implements CommandLineRunner {
         Beer beer1 = beerRepository.save(Beer.builder()
                 .beerName("Qingdao")
                 .id(UUID.randomUUID())
+                .beerStyle(BeerStyle.GOSE)
                 .createDate(LocalDateTime.now())
                 .price(new BigDecimal("3"))
                 .quantityOnHand(3)
@@ -41,6 +43,7 @@ public class BootStrapData implements CommandLineRunner {
         beer1 = beerRepository.save(Beer.builder()
                 .beerName("BaoJiBeer")
                 .id(UUID.randomUUID())
+                .beerStyle(BeerStyle.IPA)
                 .createDate(LocalDateTime.now())
                 .price(new BigDecimal("3.5"))
                 .quantityOnHand(2)
@@ -52,6 +55,7 @@ public class BootStrapData implements CommandLineRunner {
         beer1 = beerRepository.save(Beer.builder()
                 .beerName("Baiwei")
                 .id(UUID.randomUUID())
+                .beerStyle(BeerStyle.IPA)
                 .createDate(LocalDateTime.now())
                 .price(new BigDecimal("6.5"))
                 .quantityOnHand(3)
