@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import ripemango.springframework.spring6restmvc.model.BeerDTO;
+import ripemango.springframework.spring6restmvc.model.BeerStyle;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -59,7 +60,7 @@ public class BeerServiceImpl implements BeerService {
 
 
     @Override
-    public List<BeerDTO> listBeers(){
+    public List<BeerDTO> listBeers(String BeerName, BeerStyle beerStyle, Boolean showInventory, Integer PageNumber, Integer PageSize){
         return new ArrayList<>(beerMap.values());
     }
 

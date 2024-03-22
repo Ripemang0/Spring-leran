@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ripemango.springframework.spring6restmvc.model.BeerDTO;
+import ripemango.springframework.spring6restmvc.model.BeerStyle;
 import ripemango.springframework.spring6restmvc.service.BeerService;
 
 import java.util.List;
@@ -71,8 +72,12 @@ public class BeerController {
     }
 
     @GetMapping(BEER_PATH)
-    public List<BeerDTO> listBeers(){
-        return beerService.listBeers();
+    public List<BeerDTO> listBeers(@RequestParam(required = false) String beerName,
+                                   @RequestParam(required = false) BeerStyle beerStyle,
+                                   @RequestParam(required = false) Boolean showInventory,
+                                   @RequestParam(required = false)Integer pageNumber,
+                                   @RequestParam(required = false)Integer pageSize){
+        return beerService.listBeers(beerName, beerStyle, showInventory, 1, 25);
     }
 
     @GetMapping(BEER_PATH_ID)
